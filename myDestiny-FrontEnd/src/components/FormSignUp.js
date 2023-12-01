@@ -1,36 +1,34 @@
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import usuariosActions from "../redux/actions/usuarioActions";
 import { connect } from "react-redux";
-import { GoogleLogin } from "react-google-login";
-import { FcGoogle } from "react-icons/fc";
 import useValidacion from "../hooks/useValidacion";
 import useAlerts from "../hooks/useAlerts";
 
 const FormSignUp = (props) => {
   const formulario = {
-    Name: "",
-    LastName: "",
-    Email: "",
-    Password: "",
-    UrlPicture: "",
+    primerNombre: "",
+    apellido: "",
+    email: "",
+    contraseña: "",
+    fotoPerfil: "",
+    pais: "",
+    rol: "user",
   };
-  // Estados
+
   const [paises, setPaises] = useState([]);
   const validacion = useValidacion(formulario);
   const [paisSeleccionado, setPaisSeleccionado] = useState("null");
-  const [rolSeleccionado, setRolSeleccionado] = useState("null");
+  const [rolSeleccionado, setRolSeleccionado] = useState("user");
 
-  // Trae los paises de la api cuando monta el componente
   useEffect(() => {
     axios
-      .get("https://restcountries.com/v2/all?fields=name")
-      .then((respuesta) => setPaises(respuesta.data));
+      .get("http://localhost:3000/auth/all")
+      .then((respuesta) => setPaises(respuesta.data.users));
   }, []);
 
   const alertas = useAlerts();
 
-  // ref para los inputs
   const nombre = useRef();
   const apellido = useRef();
   const email = useRef();
@@ -43,20 +41,21 @@ const FormSignUp = (props) => {
     e.target.value !== "null"
       ? setPaisSeleccionado(e.target.value)
       : setPaisSeleccionado("null");
+
   const HandleSelectRol = (e) =>
     e.target.value !== "null"
       ? setRolSeleccionado(e.target.value)
-      : setRolSeleccionado("null");
+      : setRolSeleccionado("user");
 
   const submitForm = async (e) => {
     e.preventDefault();
     validacion.detectarErrores();
     if (
-      validacion.formularioEstado.Name === "check" &&
-      validacion.formularioEstado.LastName === "check" &&
-      validacion.formularioEstado.Email === "check" &&
-      validacion.formularioEstado.Password === "check" &&
-      validacion.formularioEstado.UrlPicture === "check" &&
+      validacion.formularioEstado.primerNombre === "check" &&
+      validacion.formularioEstado.apellido === "check" &&
+      validacion.formularioEstado.email === "check" &&
+      validacion.formularioEstado.contraseña === "check" &&
+      validacion.formularioEstado.fotoPerfil === "check" &&
       paisSeleccionado !== "null"
     ) {
       const nuevoUsuario = await props.nuevoUsuario({
@@ -66,7 +65,7 @@ const FormSignUp = (props) => {
         contraseña: password.current.value,
         fotoPerfil: urlFoto.current.value,
         pais: paisSeleccionado,
-        rol: rolSeleccionado
+        rol: rolSeleccionado,
       });
 
       if (!nuevoUsuario.data.success) {
@@ -79,35 +78,6 @@ const FormSignUp = (props) => {
           nuevoUsuario.data.response.nuevoUsuario.primerNombre
       );
     } else alertas.tostadas("front", validacion.errores);
-    
-    
-  };
-
-  const responseGoogle = (response) => {
-    let googleUser = {
-      primerNombre: response.profileObj.givenName,
-      apellido: response.profileObj.familyName,
-      contraseña: response.profileObj.googleId,
-      email: response.profileObj.email,
-      fotoPerfil: response.profileObj.imageUrl,
-      pais: "Undefined",
-      google: true,
-    };
-    props
-      .nuevoUsuario(googleUser)
-      .then((response) => {
-        if (!response.data.success) {
-          console.log(response.data.success);
-          alertas.alerta("errores", null, response.data.response);
-        } else {
-          console.log(response.data);
-          alertas.alerta(
-            "success",
-            "Successful sign up " + response.data.response.nuevoUsuario.email
-          );
-        }
-      })
-      .catch((error) => console.log(error));
   };
 
   return (
@@ -118,7 +88,7 @@ const FormSignUp = (props) => {
         onSubmit={submitForm}
       >
         {validacion.crearInput(
-          "Name",
+          "primerNombre",
           nombre,
           "text",
           "First name",
@@ -126,7 +96,7 @@ const FormSignUp = (props) => {
           "Invalid first name letters - min 3 max 12"
         )}
         {validacion.crearInput(
-          "LastName",
+          "apellido",
           apellido,
           "text",
           "Last name",
@@ -134,7 +104,7 @@ const FormSignUp = (props) => {
           "Invalid last name letters - min 3 max 16"
         )}
         {validacion.crearInput(
-          "Email",
+          "email",
           email,
           "email",
           "Email",
@@ -142,7 +112,7 @@ const FormSignUp = (props) => {
           "Invalid email"
         )}
         {validacion.crearInput(
-          "Password",
+          "contraseña",
           password,
           "password",
           "password",
@@ -150,7 +120,7 @@ const FormSignUp = (props) => {
           "Invalid password letters or numbers min:8 max:16"
         )}
         {validacion.crearInput(
-          "UrlPicture",
+          "fotoPerfil",
           urlFoto,
           "text",
           "Url profile picture",
@@ -158,17 +128,11 @@ const FormSignUp = (props) => {
           "Invalid url"
         )}
         <div className="input_form">
-          <select
-          onChange={HandleSelectRol}
-          ref={rol}
-          defaultValue="-"
-          required
-          >
+          <select onChange={HandleSelectRol} ref={rol} defaultValue="user" required>
             <option value="user">user</option>
             <option value="guia">guide</option>
           </select>
         </div>
-        
 
         {paises.length > 0 ? (
           <div className="input_form">
@@ -176,13 +140,13 @@ const FormSignUp = (props) => {
               placeholder="Choose your country"
               onChange={HandleSelect}
               ref={pais}
-              defaultValue="-"
+              defaultValue="null"
               required
             >
               <option value="null">Choose your country</option>
               {paises.map((pais) => (
-                <option key={pais.name} value={pais.name}>
-                  {pais.name}
+                <option key={pais.email} value={pais.email}>
+                  {pais.email}
                 </option>
               ))}
             </select>
@@ -200,24 +164,6 @@ const FormSignUp = (props) => {
           value="Create account"
         />
       </form>
-      <GoogleLogin
-        clientId="46061314994-265078hfe23i87j6ueugsc8lmh9vs4ii.apps.googleusercontent.com"
-        render={(renderProps) => (
-          <button
-            onClick={renderProps.onClick}
-            className="btn-form"
-            disabled={renderProps.disabled}
-          >
-            Sign up whit google
-            <FcGoogle className="mx-3" />
-          </button>
-        )}
-        buttonText="Login"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
-        cookiePolicy={"single_host_origin"}
-      />
-      , ,
     </>
   );
 };
@@ -225,4 +171,5 @@ const FormSignUp = (props) => {
 const mapDispatchToProps = {
   nuevoUsuario: usuariosActions.nuevoUsuario,
 };
+
 export default connect(null, mapDispatchToProps)(FormSignUp);
