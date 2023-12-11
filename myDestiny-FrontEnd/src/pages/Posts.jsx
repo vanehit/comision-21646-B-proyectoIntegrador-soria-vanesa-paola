@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts } from '../storeRedux/actions/PostsAction';
+import { fetchPosts } from '../store/actions/postAction';
 import Loader from '../components/Loader';
 import HeaderPosts from '../components/HeaderPosts';
 import PostCardsContainer from '../components/PostCardsContainer';
 
 const Posts = () => {
   const dispatch = useDispatch();
-  const posts = useSelector((state) => state.posts);
-  const loading = useSelector((state) => state.loading);
-  const error = useSelector((state) => state.error);
+  const postsState = useSelector((state) => state.posts);
+  const posts = postsState.posts;
+  const loading = postsState.loading;
+  const error = postsState.error;
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -43,8 +44,8 @@ const Posts = () => {
       <div className="container-posts">
       <div className="post-cards-container">
         {posts.map((post) => (
-          <PostCardsContainer key={post._id} posts={[post]} />
-        ))}
+        <PostCardsContainer key={post._id} posts={[post]} />
+      ))}
       </div>
       </div>
     </div>

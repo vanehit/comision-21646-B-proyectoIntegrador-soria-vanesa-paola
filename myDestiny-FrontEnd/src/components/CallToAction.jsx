@@ -7,7 +7,9 @@ const CallToAction = () => {
     <div className="call-to-action">
       <button className="tu-clase-de-botón">
         Choose destination now! <IoIosAirplane className="animate__animated animate__bounceInLeft" />
-      </button>
+      </button>  
+
+      
     </div>
   );
 };

@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <div className='header-section'>
       <Hero />
-      {/* Puedes agregar más contenido aquí si es necesario */}
+      
     </div>
   );
 };

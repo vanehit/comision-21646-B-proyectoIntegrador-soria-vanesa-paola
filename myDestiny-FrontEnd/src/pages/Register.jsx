@@ -1,42 +1,40 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {  useNavigate } from 'react-router-dom';
+import { registerUser } from '../store/actions/authActions'; 
+import Login from './Login';
 
-const Register = () => {
-  const [isSignUp, setIsSignUp] = useState(true);
-  const history = useHistory();
+const Register = ({ registerUser }) => {
+  const [isRegister, setIsRegister] = useState(true);
+  const navigate = useNavigate();
 
   const toggleForm = () => {
-    setIsSignUp((prev) => !prev);
+    setIsRegister((prev) => !prev);
   };
 
   const handleAuthChange = () => {
-    history.push(isSignUp ? '/Signin' : '/Signup');
+    navigate.push(isRegister ? '/login' : '/register');
   };
 
-  const handleSignUp = async () => {
+  const handleRegister = async () => {
     try {
-      const response = await fetch('http://localhost:3000/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          // Datos del formulario (nombre de usuario, contraseña, email, avatarURL, etc.)
-        }),
-      });
-
-      if (response.ok) {
-        // Registro exitoso, manejar la respuesta o redirigir
-        handleAuthChange();
-      } else {
-        // Manejar errores de registro
-        const data = await response.json();
-        console.error(data.error);
-      }
+      // Datos del formulario 
+      const userData = {
+        username: 'nombreDeUsuario',
+        password: 'contraseña',
+        email: 'correo@ejemplo.com',
+      };
+  
+      // Llamar a la acción de Redux para registrar al usuario
+      await registerUser(userData);
+  
+      // Redirigir después del registro exitoso
+      handleAuthChange();
     } catch (error) {
-      console.error('Error durante el registro:', error);
+      console.error('Error during registration:', error);
     }
   };
+  
 
   return (
     <div className="contenedor_inputs">
@@ -46,19 +44,25 @@ const Register = () => {
           <div className="contenedor_inputs_card_izquierda_btn">
             <h2 className="font-bold montserrat">Hello Adventurer!</h2>
             <p className="font-bold poppins">
-              {isSignUp ? 'Already have an account?' : "Don't you have an account yet?"}
+              {isRegister ? 'Already have an account?' : "Don't you have an account yet?"}
             </p>
             <button onClick={toggleForm} className="font-bold texto-naranja">
-              {isSignUp ? 'Log in here' : 'Sign up here'}
+              {isRegister ? 'Log in here' : 'Sign up here'}
             </button>
           </div>
         </div>
         <div className="contenedor_inputs_card_derecha">
-          {isSignUp ? <FormSignUp onAuthChange={handleAuthChange} /> : <FormSignIn />}
+          {/* Deberías manejar el formulario de registro dentro de tu componente FormSignUp */}
+          {isRegister ? <Register onAuthChange={handleAuthChange} /> : <Login />}
+          <button onClick={handleRegister}>Sign Up</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default Register;
+const mapDispatchToProps = {
+  registerUser,
+};
+
+export default connect(null, mapDispatchToProps)(Register);

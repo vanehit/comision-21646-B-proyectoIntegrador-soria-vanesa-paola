@@ -6,7 +6,6 @@ const Home = () => {
   return (
     <div>
       <Header />
-      {/* Aquí podrías añadir más secciones o componentes según sea necesario */}
     </div>
   );
 };
