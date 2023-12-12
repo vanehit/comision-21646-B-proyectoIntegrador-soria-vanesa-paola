@@ -1,5 +1,6 @@
 import { BsTwitter, BsInstagram, BsFacebook } from 'react-icons/bs';
 import { Link as Anchor } from "react-router-dom";
+import './Footer.css';
 
 const Footer = () => {
   return (

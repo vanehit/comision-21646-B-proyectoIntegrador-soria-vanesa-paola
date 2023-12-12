@@ -3,6 +3,7 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link as Anchor } from "react-router-dom";
 
 const NavbarHome = () => {
+  
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top" className="navbar-home">

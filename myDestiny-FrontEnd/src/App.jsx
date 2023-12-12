@@ -5,8 +5,8 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Posts from './pages/Posts';
-import NavbarHome from './components/Navbar';
-import Footer from './components/Footer';
+import NavbarHome from './components/Navbar/Navbar';
+import Footer from './components/Footer/Footer';
 
 
 
