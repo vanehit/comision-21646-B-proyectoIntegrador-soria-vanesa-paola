@@ -1,12 +1,14 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/home';
+import Home from './pages/Home';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Posts from './pages/Posts';
 import NavbarHome from './components/Navbar';
 import Footer from './components/Footer';
+
+
 
 
 const App = () => {

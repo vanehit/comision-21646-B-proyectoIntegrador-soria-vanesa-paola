@@ -30,9 +30,9 @@ const Footer = () => {
 
         <div className="footer_links">
           <Anchor to="/" className="enlace-footer">Home</Anchor>
-          <Anchor to="/Register" className="enlace-footer">Register</Anchor>
-          <Anchor to="/Login" className="enlace-footer">Login</Anchor>
-          <Anchor to="/Posts" className="enlace-footer">Posts</Anchor>
+          <Anchor to="/register" className="enlace-footer">Register</Anchor>
+          <Anchor to="/login" className="enlace-footer">Login</Anchor>
+          <Anchor to="/posts" className="enlace-footer">Posts</Anchor>
         </div>
       </div>
       <p className="text-center copyright">

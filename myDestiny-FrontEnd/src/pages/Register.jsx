@@ -1,11 +1,17 @@
+// SignUp.js
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import {  useNavigate } from 'react-router-dom';
-import { registerUser } from '../store/actions/authActions'; 
+import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../store/actions/authActions';
 import Login from './Login';
 
-const Register = ({ registerUser }) => {
+const SignUp = ({ registerUser }) => {
   const [isRegister, setIsRegister] = useState(true);
+  const [userData, setUserData] = useState({
+    username: '',
+    password: '',
+    email: '',
+  });
   const navigate = useNavigate();
 
   const toggleForm = () => {
@@ -18,23 +24,15 @@ const Register = ({ registerUser }) => {
 
   const handleRegister = async () => {
     try {
-      // Datos del formulario 
-      const userData = {
-        username: 'nombreDeUsuario',
-        password: 'contraseña',
-        email: 'correo@ejemplo.com',
-      };
-  
       // Llamar a la acción de Redux para registrar al usuario
       await registerUser(userData);
-  
+
       // Redirigir después del registro exitoso
       handleAuthChange();
     } catch (error) {
       console.error('Error during registration:', error);
     }
   };
-  
 
   return (
     <div className="contenedor_inputs">
@@ -52,8 +50,31 @@ const Register = ({ registerUser }) => {
           </div>
         </div>
         <div className="contenedor_inputs_card_derecha">
-          {/* Deberías manejar el formulario de registro dentro de tu componente FormSignUp */}
-          {isRegister ? <Register onAuthChange={handleAuthChange} /> : <Login />}
+          {isRegister ? (
+            <form>
+              {/* Agrega los campos del formulario */}
+              <input
+                type="text"
+                placeholder="Username"
+                value={userData.username}
+                onChange={(e) => setUserData({ ...userData, username: e.target.value })}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                value={userData.password}
+                onChange={(e) => setUserData({ ...userData, password: e.target.value })}
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                value={userData.email}
+                onChange={(e) => setUserData({ ...userData, email: e.target.value })}
+              />
+            </form>
+          ) : (
+            <Login />
+          )}
           <button onClick={handleRegister}>Sign Up</button>
         </div>
       </div>
@@ -65,4 +86,4 @@ const mapDispatchToProps = {
   registerUser,
 };
 
-export default connect(null, mapDispatchToProps)(Register);
+export default connect(null, mapDispatchToProps)(SignUp);

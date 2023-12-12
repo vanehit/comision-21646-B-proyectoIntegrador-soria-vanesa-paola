@@ -8,7 +8,7 @@ export const registerUser = (userData) => {
     try {
       const response = await axios.post('http://localhost:3000/auth/register', userData);
 
-      if (response.ok) {
+      if (response.status === 200) {
         dispatch(registerSuccess(response.data.user));
       } else {
         const data = await response.json();
