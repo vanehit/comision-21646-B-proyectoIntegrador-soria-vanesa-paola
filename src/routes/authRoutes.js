@@ -1,4 +1,3 @@
-// authRoutes.js
 import express from 'express';
 import { registerUser, getUserId, updateUser, deleteUser, loginUser, getAllUsersFromDatabase } from '../controllers/authController.js';
 
