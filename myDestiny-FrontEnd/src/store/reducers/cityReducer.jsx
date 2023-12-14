@@ -1,24 +1,24 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  posts: [],
+  cities: [],
   loading: false,
   error: null,
 };
 
-const postsSlice = createSlice({
-  name: 'posts',
+const citiesSlice = createSlice({
+  name: 'cities',
   initialState,
   reducers: {
-    postsRequest: (state) => {
+    citiesRequest: (state) => {
       state.loading = true;
       state.error = null;
     },
-    postsSuccess: (state, action) => {
+    citiesSuccess: (state, action) => {
       state.loading = false;
-      state.posts = action.payload;
+      state.cities = action.payload;
     },
-    postsFailure: (state, action) => {
+    citiesFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
     },
@@ -26,9 +26,9 @@ const postsSlice = createSlice({
 });
 
 export const {
-  postsRequest,
-  postsSuccess,
-  postsFailure,
-} = postsSlice.actions;
+  citiesRequest,
+  citiesSuccess,
+  citiesFailure,
+} = citiesSlice.actions;
 
-export default postsSlice.reducer;
+export default citiesSlice.reducer;

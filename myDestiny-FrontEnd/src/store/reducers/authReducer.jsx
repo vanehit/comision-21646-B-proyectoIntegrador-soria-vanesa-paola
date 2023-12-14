@@ -22,7 +22,6 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    // Agrega otras acciones según sea necesario
   },
 });
 
@@ -30,7 +29,6 @@ export const {
   registerRequest,
   registerSuccess,
   registerFailure,
-  // Agrega otras acciones según sea necesario
 } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -1,4 +1,3 @@
-// postAction.jsx
 import axios from 'axios';
 import { postsRequest, postsSuccess, postsFailure } from '../reducers/postReducer';
 

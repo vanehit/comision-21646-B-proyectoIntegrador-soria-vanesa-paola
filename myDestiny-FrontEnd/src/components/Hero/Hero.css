@@ -1,0 +1,25 @@
+@import 'animate.css';
+/* Estilos personalizados para el componente Hero */
+
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Alinea los elementos en el lado izquierdo */
+    padding: 20px;
+    height: 100%; /* O ajusta según tus necesidades */
+    min-height: 300px; /* Establece una altura mínima */
+  }
+  
+  .titulo {
+    font-size: 2.5rem; /* Tamaño del título h1 */
+    margin-bottom: 10px; /* Margen inferior del título h1 */
+  }
+  
+  .parrafo {
+    font-size: 1.5rem; /* Tamaño del párrafo */
+    margin-bottom: 20px; /* Margen inferior del párrafo */
+  }
+  
+
+  

@@ -1,5 +1,6 @@
 import React from 'react';
 import CallToAction from '../CallToAction/CallToAction';
+import './Hero.css'
 
 const Hero = () => {
   return (
@@ -8,7 +9,7 @@ const Hero = () => {
       <p className="parrafo animate__animated animate__fadeInRight">
         Find your perfect trip, designed by insiders who know and love their cities!
       </p>
-      <CallToAction className="btnC" />
+      <CallToAction  />
     </div>
   );
 };

@@ -1,0 +1,80 @@
+[
+    {
+      "title": "Busan City Tour",
+      "description": "Explore the vibrant city of Busan, South Korea. Discover a unique blend of traditional and modern attractions, from ancient temples to bustling markets and beautiful beaches.",
+      "author": "64fa18e0cb1e27110059ba24",
+      "comments": [],
+      "imageURL": "/public/assets/images/CBusan.jpg"
+    },
+    {
+      "title": "California City Tour",
+      "description": "Embark on a journey through the diverse landscapes of California, USA. From the stunning beaches of the Pacific Coast to the majestic redwoods and vibrant cities, California offers an unforgettable experience.",
+      "author": "64fa18e0cb1e27110059ba24",
+      "comments": [],
+      "imageURL": "/public/assets/images/CCalifornia.jpg"
+    },
+    {
+      "title": "China City Tour",
+      "description": "Experience the rich history and culture of China. Visit iconic landmarks such as the Great Wall and the Forbidden City, and immerse yourself in the beauty of traditional Chinese architecture and cuisine.",
+      "author": "64fa18e0cb1e27110059ba24",
+      "comments": [],
+      "imageURL": "/public/assets/images/CChina.jpg"
+    },
+    {
+      "title": "Dublin City Tour",
+      "description": "Discover the charm of Dublin, Ireland. Walk through historic streets, visit lively pubs, and explore cultural treasures such as Trinity College and the Dublin Castle.",
+      "author": "64fa18e0cb1e27110059ba24",
+      "comments": [],
+      "imageURL": "/public/assets/images/CDublin.jpg"
+    },
+    {
+      "title": "Kyoto City Tour",
+      "description": "Immerse yourself in the ancient beauty of Kyoto, Japan. Explore historic temples, traditional tea houses, and stunning gardens that reflect the city's rich cultural heritage.",
+      "author": "64fa18e0cb1e27110059ba24",
+      "comments": [],
+      "imageURL": "/public/assets/images/CKyoto.jpg"
+    },
+    {
+      "title": "Miami City Tour",
+      "description": "Experience the vibrant nightlife and beautiful beaches of Miami, USA. From the iconic Art Deco architecture of South Beach to the cultural diversity of Little Havana, Miami offers a unique blend of excitement and relaxation.",
+      "author": "64fa18e0cb1e27110059ba24",
+      "comments": [],
+      "imageURL": "/public/assets/images/CMiami.jpg"
+    },
+    {
+      "title": "Portimão City Tour",
+      "description": "Visit the picturesque coastal town of Portimão, Portugal. Enjoy the golden beaches, explore historic landmarks, and savor the flavors of Portuguese cuisine.",
+      "author": "64fa18e0cb1e27110059ba24",
+      "comments": [],
+      "imageURL": "/public/assets/images/CPortimao.jpg"
+    },
+    {
+      "title": "Pucon City Tour",
+      "description": "Discover the natural beauty of Pucon, Chile. Nestled between lakes and volcanoes, Pucon offers outdoor adventures, hot springs, and breathtaking landscapes.",
+      "author": "64fa18e0cb1e27110059ba24",
+      "comments": [],
+      "imageURL": "/public/assets/images/Cpucon.jpg"
+    },
+    {
+      "title": "Rio de Janeiro City Tour",
+      "description": "Experience the lively atmosphere of Rio de Janeiro, Brazil. Enjoy the iconic Copacabana and Ipanema beaches, explore the Christ the Redeemer statue, and embrace the rhythm of samba.",
+      "author": "64fa18e0cb1e27110059ba24",
+      "comments": [],
+      "imageURL": "/public/assets/images/CRioDeJaneiro.jpg"
+    },
+    {
+      "title": "Rome City Tour",
+      "description": "Step back in time and explore the ancient wonders of Rome, Italy. Visit the Colosseum, Roman Forum, and Vatican City, and immerse yourself in the rich history and culture of the Eternal City.",
+      "author": "64fa18e0cb1e27110059ba24",
+      "comments": [],
+      "imageURL": "/public/assets/images/CRome.jpg"
+    },
+    {
+      "title": "San Sebastian City Tour",
+      "description": "Indulge in the culinary delights and seaside beauty of San Sebastian, Spain. Discover the charming Old Town, relax on the beaches, and savor world-renowned Basque cuisine.",
+      "author": "64fa18e0cb1e27110059ba24",
+      "comments": [],
+      "imageURL": "/public/assets/images/CSanSebastian.jpg"
+    }
+  ]
+  

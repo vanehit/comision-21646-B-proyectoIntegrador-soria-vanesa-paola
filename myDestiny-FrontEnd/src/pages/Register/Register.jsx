@@ -2,11 +2,14 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../store/actions/authActions';
-import Login from './Login';
+import { registerUser } from '../../store/actions/authActions';
+import './Register.css'
+import RegisterModal from '../../components/RegisterModal/RegisterModal'; 
+import Login from '../Login/Login';
 
 const SignUp = ({ registerUser }) => {
   const [isRegister, setIsRegister] = useState(true);
+  const [showModal, setShowModal] = useState(false); // Estado para controlar la visibilidad del modal
   const [userData, setUserData] = useState({
     username: '',
     password: '',
@@ -24,15 +27,18 @@ const SignUp = ({ registerUser }) => {
 
   const handleRegister = async () => {
     try {
-      // Llamar a la acción de Redux para registrar al usuario
+      // Llamamos a la acción de Redux para registrar al usuario
       await registerUser(userData);
 
-      // Redirigir después del registro exitoso
+      // Redirigimos después del registro exitoso
       handleAuthChange();
     } catch (error) {
       console.error('Error during registration:', error);
     }
   };
+
+  const handleModalShow = () => setShowModal(true);
+  const handleModalClose = () => setShowModal(false);
 
   return (
     <div className="contenedor_inputs">
@@ -52,7 +58,7 @@ const SignUp = ({ registerUser }) => {
         <div className="contenedor_inputs_card_derecha">
           {isRegister ? (
             <form>
-              {/* Agrega los campos del formulario */}
+              {/* Agregamos los campos del formulario */}
               <input
                 type="text"
                 placeholder="Username"
@@ -75,9 +81,10 @@ const SignUp = ({ registerUser }) => {
           ) : (
             <Login />
           )}
-          <button onClick={handleRegister}>Sign Up</button>
+          <button onClick={handleModalShow}>Sign Up</button> {/* Abre el modal al hacer clic */}
         </div>
       </div>
+      <RegisterModal showModal={showModal} handleClose={handleModalClose} />
     </div>
   );
 };

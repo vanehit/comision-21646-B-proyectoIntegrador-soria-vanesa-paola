@@ -37,7 +37,7 @@ const Footer = () => {
         </div>
       </div>
       <p className="text-center copyright">
-        Copyright © - MYDESTINY All Rights Reserved.
+        Copyright © - MYDESTINY All Rights Reserved - Vanesa Paola Soria.
       </p>
     </>
   );

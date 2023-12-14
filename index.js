@@ -12,6 +12,7 @@ import { startConnection } from "./src/settings/database.js";
 import authRouter from "./src/routes/authRoutes.js"; 
 import postRouter from "./src/routes/postRoutes.js";
 import commentRouter from "./src/routes/commentRoutes.js";
+import cityRouter from "./src/routes/routesCity.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,9 +38,11 @@ app.use(express.static(publicPath));
 app.get('/', (req, res) => {
   res.send('Welcome to MyDestiny!');
 });
+
 app.use("/auth", authRouter);
 app.use('/posts', postRouter);
 app.use('/comments', commentRouter);
+app.use('/cities', cityRouter );
 
 // Manejamos los errores globales
 app.use((err, req, res, next) => {

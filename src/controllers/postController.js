@@ -1,11 +1,10 @@
 import Post from '../models/Post.js';
+import City from '../models/City.js';
 import { validationResult } from 'express-validator';
 
-
-// Obtener todos los posts
-const getPosts = async (req, res) => {
+export const getPosts = async (req, res) => {
   try {
-    const posts = await Post.find();
+    const posts = await Post.find().populate('cities');
     res.status(200).json({ message: 'Lista de posts obtenida correctamente', posts });
   } catch (error) {
     console.error('Error al obtener los posts:', error);
@@ -13,28 +12,28 @@ const getPosts = async (req, res) => {
   }
 };
 
-
-// Crear posts
-const createPost = async (req, res) => {
+export const createPost = async (req, res) => {
   try {
-    // Aplicamos las validaciones
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { title, description, author, comments, imageURL } = req.body;
+    const { title, description, author, comments, imageURL, cityId } = req.body;
 
-    // Verificamos si ya existe un post con el mismo título
     const existingPost = await Post.findOne({ title });
 
     if (existingPost) {
       return res.status(400).json({ error: 'Ya existe un post con el mismo título.' });
     }
 
-    const newPost = new Post({ title, description, author, comments, imageURL });
-
+    const newPost = new Post({ title, description, author, comments, imageURL, cities: [cityId] });
     await newPost.save();
+
+    const city = await City.findById(cityId);
+    city.posts.push(newPost);
+    await city.save();
+
     res.status(201).json({ message: 'Post creado con éxito', post: newPost });
   } catch (error) {
     console.error('Error al crear el post:', error);
@@ -42,14 +41,11 @@ const createPost = async (req, res) => {
   }
 };
 
-
-// Actualizamos los posts
-const updatePost = async (req, res) => {
+export const updatePost = async (req, res) => {
   try {
     const postId = req.params.postId;
     const { title, description, author, comments, imageURL } = req.body;
 
-    // Validamos los campos del post antes de procesarlos
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
@@ -57,7 +53,7 @@ const updatePost = async (req, res) => {
 
     const updatedPost = await Post.findByIdAndUpdate(
       postId,
-      { title, description, author, comments, imageURL },
+      { $set: { title, description, author, comments, imageURL } },
       { new: true }
     );
 
@@ -72,8 +68,7 @@ const updatePost = async (req, res) => {
   }
 };
 
-// Borramos posts
-const deletePost = async (req, res) => {
+export const deletePost = async (req, res) => {
   try {
     const postId = req.params.postId;
 
@@ -88,11 +83,4 @@ const deletePost = async (req, res) => {
     console.error('Error al eliminar el post:', error);
     res.status(500).json({ error: 'Error al eliminar el post' });
   }
-};
-
-export { 
-  getPosts,
-  createPost, 
-  updatePost, 
-  deletePost 
 };
